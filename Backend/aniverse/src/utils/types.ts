@@ -8,3 +8,9 @@ export type page = {
   results: video[];
   nextPageToken: string;
 };
+
+export type customizationResult = Promise<{
+  success: boolean;
+  message: string;
+  data: any;
+}>;
