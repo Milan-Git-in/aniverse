@@ -14,3 +14,9 @@ export type customizationResult = Promise<{
   message: string;
   data: any;
 }>;
+
+export type Greetings = {
+  greetings: string;
+  message: string;
+  guidence: string;
+};

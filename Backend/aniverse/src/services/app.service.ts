@@ -1,8 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { Greetings } from 'src/utils/types';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getHello(): Greetings {
+    return {
+      greetings: 'Yo! Sashi buri',
+      message: 'Welcome to Aniverse',
+      guidence: 'stuck?, call 911!',
+    };
   }
 }

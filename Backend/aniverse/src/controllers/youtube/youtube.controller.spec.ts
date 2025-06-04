@@ -32,7 +32,7 @@ describe('YoutubeController', () => {
     expect(controller.getSearchResults).toBeDefined();
   });
 
-  it('should have getLatest method', async () => {
+  it('getLatest method should return an array', async () => {
     expect(controller.getLatest).toBeDefined();
     const res = await controller.getLatest();
     expect(res).not.toBe(null);
