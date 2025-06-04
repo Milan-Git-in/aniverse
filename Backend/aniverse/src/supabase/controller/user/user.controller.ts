@@ -6,9 +6,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CreateUserDTo } from 'src/DTOs/create-user.dto';
-import { EmailDto } from 'src/DTOs/email.dto';
-import { UserService } from 'src/supabase/service/user/user.service';
+import { CreateUserDTo } from '../../../DTOs/create-user.dto';
+import { EmailDto } from '../../../DTOs/email.dto';
+import { UserService } from '../../service/user/user.service';
 @Controller('supabase/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}

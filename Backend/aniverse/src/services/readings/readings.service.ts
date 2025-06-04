@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { SupabaseService } from 'src/supabase/service/supabase.service';
+import { SupabaseService } from '../../supabase/service/supabase.service';
 @Injectable()
 export class ReadingsService {
   private readonly supabase: SupabaseClient;

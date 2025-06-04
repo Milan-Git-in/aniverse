@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post, Query } from '@nestjs/common';
 import { YoutubeService } from '../../services/youtube/youtube.service';
-import { page } from 'src/utils/types';
+import { page } from '../../utils/types';
 @Controller('youtube/v1/')
 export class YoutubeController {
   constructor(private readonly youtubeService: YoutubeService) {}

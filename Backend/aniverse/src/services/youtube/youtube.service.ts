@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { page, video } from 'src/utils/types';
+import { page } from '../../utils/types';
 import { SupabaseService } from 'src/supabase/service/supabase.service';
 import { SupabaseClient } from '@supabase/supabase-js';
 @Injectable()

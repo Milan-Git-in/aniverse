@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Greetings } from 'src/utils/types';
+import { Greetings } from '../utils/types';
 
 @Injectable()
 export class AppService {

@@ -2,7 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { BloomFilter } from 'bloom-filters';
 import { RedisService } from '../redis/redis.service';
 import { Interval } from '@nestjs/schedule';
-import { SupabaseService } from 'src/supabase/service/supabase.service';
+import { SupabaseService } from '../../supabase/service/supabase.service';
 const REDIS_KEY = 'bloom:email:filter';
 
 @Injectable()

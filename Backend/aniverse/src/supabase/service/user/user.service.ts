@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { CreateUserDTo } from 'src/DTOs/create-user.dto';
-import { SupabaseService } from 'src/supabase/service/supabase.service';
-import { customizationResult } from 'src/utils/types';
-import { BloomFilterService } from 'src/services/filter/bloom-filter.service';
+import { CreateUserDTo } from '../../../DTOs/create-user.dto';
+import { SupabaseService } from '../../../supabase/service/supabase.service';
+import { customizationResult } from '../../../utils/types';
+import { BloomFilterService } from '../../../services/filter/bloom-filter.service';
 @Injectable()
 export class UserService {
   private supabase: SupabaseClient;
