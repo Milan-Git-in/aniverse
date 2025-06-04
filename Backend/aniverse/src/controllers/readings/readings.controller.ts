@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ReadingsService } from 'src/services/readings/readings.service';
+import { ReadingsService } from '../../services/readings/readings.service';
 @Controller('readings')
 export class ReadingsController {
   constructor(private readonly readingsService: ReadingsService) {}

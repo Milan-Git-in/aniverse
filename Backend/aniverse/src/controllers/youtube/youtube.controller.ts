@@ -1,5 +1,5 @@
 import { Body, Controller, Param, Post, Query } from '@nestjs/common';
-import { YoutubeService } from 'src/services/youtube/youtube.service';
+import { YoutubeService } from '../../services/youtube/youtube.service';
 import { page } from 'src/utils/types';
 @Controller('youtube/v1/')
 export class YoutubeController {

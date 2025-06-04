@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { NodemailerService } from 'src/services/nodemailer/nodemailer.service';
+import { NodemailerService } from '../../services/nodemailer/nodemailer.service';
 @Controller('nodemailer')
 export class NodemailerController {
   constructor(private readonly nodemailerService: NodemailerService) {}
