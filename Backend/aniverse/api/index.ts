@@ -1,18 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app.module';
 import { ExpressAdapter } from '@nestjs/platform-express';
+import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
 
-const expressApp = express();
+const server = express();
 
-const createNestServer = async (expressInstance: express.Express) => {
-  const app = await NestFactory.create(
-    AppModule,
-    new ExpressAdapter(expressInstance),
-  );
-  await app.init();
+const createServer = async () => {
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+  app.useGlobalPipes(new ValidationPipe());
+  await app.init(); // ✅ Don't use .listen()
 };
 
-createNestServer(expressApp);
+createServer();
 
-export default expressApp;
+export default server;
