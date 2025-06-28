@@ -8,6 +8,11 @@ export class NodemailerController {
     return this.nodemailerService.sendOtp(body.email);
   }
 
+  @Post('verifyJwt')
+  async verifyJwt(@Body() body: { token: string }) {
+    return this.nodemailerService.verifyJwt(body.token);
+  }
+
   @Post('verifyMail')
   async verifyOtp(@Body() body: { email: string; otp: string }) {
     return this.nodemailerService.verifyOtp(body.email, body.otp);
