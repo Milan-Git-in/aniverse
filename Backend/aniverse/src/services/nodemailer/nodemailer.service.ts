@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { RedisService } from '../redis/redis.service';
 import { Redis } from '@upstash/redis';
+import jwt from 'jsonwebtoken';
 @Injectable()
 export class NodemailerService {
   private readonly redis: Redis;
@@ -84,17 +85,40 @@ export class NodemailerService {
     await this.redis.del(`otp:${to}`);
   }
 
+  async verifyJwt(
+    token: string,
+  ): Promise<{ success: boolean; message: string; email?: string }> {
+    try {
+      const payload = jwt.verify(token, process.env.JWT_SECRET!);
+      if (
+        typeof payload === 'object' &&
+        payload !== null &&
+        'email' in payload
+      ) {
+        return {
+          success: true,
+          message: 'Success',
+          email: (payload as { email: string }).email,
+        };
+      }
+      return { success: false, message: `Invalid token ${payload}` };
+    } catch (error) {
+      return { success: false, message: 'Invalid token' };
+    }
+  }
+
   async verifyOtp(
     to: string,
     otp: string,
-  ): Promise<{ sucess: boolean; message: string }> {
+  ): Promise<{ sucess: boolean; message: string; token?: string }> {
     const res = await this.checkAlreadySent(to);
-
+    const token = jwt.sign({ email: to }, process.env.JWT_SECRET!, {
+      expiresIn: '7d',
+    });
     if (res.otp !== null && res.otp === Number(otp)) {
       await this.removeAlreadySent(to);
-      return { sucess: true, message: 'OTP verified successfully' };
+      return { sucess: true, message: 'OTP verified successfully', token };
     }
-
     console.error('Invalid OTP Error: ', res.otp, otp);
     return { sucess: false, message: 'Invalid OTP' };
   }
