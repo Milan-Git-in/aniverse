@@ -20,7 +20,15 @@ export class UserService {
     if (!username || !email) {
       return { success: false, message: 'Username and email are required' };
     }
-    console.log(username, email);
+    const emailExists = await this.bloomFilterService.probablyHas(email);
+    if (emailExists) {
+      return {
+        success: false,
+        message:
+          'Email already exists, if you think this is a mistake, please try again later',
+        data: this.bloomFilterService.autoRefresh(),
+      };
+    }
     const { data, error } = await this.supabase
       .from('user')
       .insert([{ username, email }]);
