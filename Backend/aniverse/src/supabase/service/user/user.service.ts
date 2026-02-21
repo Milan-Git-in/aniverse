@@ -20,10 +20,15 @@ export class UserService {
     if (!username || !email) {
       return { success: false, message: 'Username and email are required' };
     }
-    console.log(username, email);
+    if (this.bloomFilterService.probablyHas(email)) {
+      return { success: false, message: 'User already exists' };
+    }
+    this.bloomFilterService.addToFilter(email);
     const { data, error } = await this.supabase
       .from('user')
-      .insert([{ username, email }]);
+      .insert([{ username, email }])
+      .select()
+      .single();
 
     if (error) {
       console.error('Error creating user:', error.message);
@@ -32,7 +37,30 @@ export class UserService {
 
     return { success: true, message: 'User created successfully', data };
   }
-
+  async getUserByEmail(email: string) {
+    const { data, error } = await this.supabase
+      .from('user')
+      .select('*')
+      .eq('email', email)
+      .single();
+    if (error) {
+      console.error('Error fetching user by email:', error.message);
+      return { success: false, message: 'User may not Exist' };
+    }
+    type user = {
+      id: number;
+      created_at: string;
+      username: string;
+      profile_picture: string;
+      email: string;
+      search_tokens: string[];
+    };
+    return {
+      success: true,
+      message: 'User fetched successfully',
+      data: data as user,
+    };
+  }
   async uploadProfile(file: Express.Multer.File): customizationResult {
     if (!file) {
       console.log(file);

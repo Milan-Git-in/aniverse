@@ -78,7 +78,7 @@ export class YoutubeService {
       .eq('email', email);
 
     const tokens = query?.data?.[0]?.search_tokens?.slice(0, 3) ?? [];
-    const q = tokens.join(' ') + ' anime amv edit';
+    const q = tokens.join(' ') + ' anime';
 
     const response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search`,

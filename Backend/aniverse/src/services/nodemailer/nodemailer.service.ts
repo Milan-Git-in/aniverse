@@ -3,13 +3,18 @@ import * as nodemailer from 'nodemailer';
 import { RedisService } from '../redis/redis.service';
 import { Redis } from '@upstash/redis';
 import jwt from 'jsonwebtoken';
+import { UserService } from 'src/supabase/service/user/user.service';
+import { user } from 'src/DTOs/user';
 @Injectable()
 export class NodemailerService {
   private readonly redis: Redis;
-  constructor(private readonly redisService: RedisService) {
+  constructor(
+    private readonly redisService: RedisService,
+    private readonly userService: UserService,
+  ) {
     this.redis = this.redisService.getClient();
   }
-  async getTransporter(): Promise<nodemailer.Transporter> {
+  getTransporter(): nodemailer.Transporter {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -21,7 +26,7 @@ export class NodemailerService {
   }
 
   async sendMail(to: string, html: string): Promise<void> {
-    const transporter = await this.getTransporter();
+    const transporter = this.getTransporter();
     const mailOptions = {
       from: 'Aniverse <Aniverse.otp@gmail.com>',
       to,
@@ -31,25 +36,30 @@ export class NodemailerService {
     await transporter.sendMail(mailOptions);
   }
 
-  async sendOtp(to: string): Promise<{ otp: number; message: string }> {
+  async sendOtp(
+    to: string,
+  ): Promise<{ success: boolean; otp: number; message: string }> {
+    if (!to) {
+      return { success: false, otp: 0, message: 'Email is required' };
+    }
     const otp = this.generateOtp();
     const res = await this.checkAlreadySent(to);
     if (res.flag) {
-      return { otp: res.otp, message: 'OTP already sent' };
+      return { success: false, otp: res.otp, message: 'OTP already sent' };
     }
-    this.setAlreadySent(to, otp);
+    await this.setAlreadySent(to, otp);
     const html = `<div style="font-family: 'Segoe UI', sans-serif; background: #f9f9f9; padding: 20px; border-radius: 8px; color: #333;">
     <h2 style="text-align: center; color: #4A90E2;">🚀 One-Time Password Incoming!</h2>
     <p>Hey there, legend! 😎</p>
     <p>Looks like you’re trying to do something cool. Here’s your magic 6-digit code to make the magic happen:</p>
-    
+
     <div style="
       font-size: 36px;
       font-weight: bold;
       letter-spacing: 8px;
       text-align: center;
       margin: 20px 0;
-      
+
     ">
       ${otp}
     </div>
@@ -60,11 +70,15 @@ export class NodemailerService {
 
     <p style="margin-top: 30px;">Cheers, <br/> <strong>Aniverse Team 🌌</strong></p>
 
-   
+
   </div>
 `;
     await this.sendMail(to, html);
-    return { otp: Number(otp), message: 'OTP sent successfully' };
+    return {
+      success: true,
+      otp: Number(otp),
+      message: 'OTP sent successfully',
+    };
   }
 
   async checkAlreadySent(to: string): Promise<{ otp: number; flag: boolean }> {
@@ -85,9 +99,11 @@ export class NodemailerService {
     await this.redis.del(`otp:${to}`);
   }
 
-  async verifyJwt(
-    token: string,
-  ): Promise<{ success: boolean; message: string; email?: string }> {
+  async verifyJwt(token: string): Promise<{
+    success: boolean;
+    message: string;
+    user?: user;
+  }> {
     try {
       const payload = jwt.verify(token, process.env.JWT_SECRET!);
       if (
@@ -95,31 +111,39 @@ export class NodemailerService {
         payload !== null &&
         'email' in payload
       ) {
+        let user: user | undefined;
+        try {
+          const data = await this.userService.getUserByEmail(payload.email);
+          user = data.data;
+        } catch (error) {
+          return { success: false, message: `User not found ${error}` };
+        }
+
         return {
           success: true,
           message: 'Success',
-          email: (payload as { email: string }).email,
+          user,
         };
       }
-      return { success: false, message: `Invalid token ${payload}` };
-    } catch (error) {
       return { success: false, message: 'Invalid token' };
+    } catch (error) {
+      return { success: false, message: `Invalid token ${error}` };
     }
   }
 
   async verifyOtp(
     to: string,
     otp: string,
-  ): Promise<{ sucess: boolean; message: string; token?: string }> {
+  ): Promise<{ success: boolean; message: string; token?: string }> {
     const res = await this.checkAlreadySent(to);
     const token = jwt.sign({ email: to }, process.env.JWT_SECRET!, {
       expiresIn: '7d',
     });
     if (res.otp !== null && res.otp === Number(otp)) {
       await this.removeAlreadySent(to);
-      return { sucess: true, message: 'OTP verified successfully', token };
+      return { success: true, message: 'OTP verified successfully', token };
     }
     console.error('Invalid OTP Error: ', res.otp, otp);
-    return { sucess: false, message: 'Invalid OTP' };
+    return { success: false, message: 'Invalid OTP' };
   }
 }

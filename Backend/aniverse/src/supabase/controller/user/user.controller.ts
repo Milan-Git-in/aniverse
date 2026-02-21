@@ -4,6 +4,7 @@ import {
   Post,
   UploadedFile,
   UseInterceptors,
+  Get,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateUserDTo } from '../../../DTOs/create-user.dto';
@@ -24,7 +25,10 @@ export class UserController {
   ) {
     return this.userService.updateProfile(file, body.email);
   }
-
+  @Post('/')
+  getUserByEmail(@Body() body: { email: string }) {
+    return this.userService.getUserByEmail(body.email);
+  }
   @Post('/customize/email')
   updateEmail(@Body() body: { email: string; NewEmail: string }) {
     console.log(body.email, body.NewEmail);

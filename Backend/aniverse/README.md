@@ -21,78 +21,332 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Aniverse Backend API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A comprehensive backend API for the Aniverse platform, built with NestJS. Aniverse is an anime-centric application that provides personalized YouTube video recommendations, user management, news, leaderboards, and reading materials (manhwas and light novels).
 
-## Project setup
+## 🚀 Features
 
-```bash
-$ npm install
+### Core Functionality
+
+- **Personalized YouTube Recommendations**: AI-powered video suggestions based on user search history
+- **User Management**: Complete user lifecycle with profile customization
+- **Email Verification**: OTP-based authentication with JWT tokens
+- **Anime News**: Real-time anime news and airing schedules from AniList
+- **Leaderboards**: Trending anime rankings
+- **Reading Materials**: Access to manhwas and light novels
+
+### Technical Features
+
+- **Scalable Architecture**: Modular NestJS structure with dependency injection
+- **Data Persistence**: Supabase for user data and file storage
+- **Caching**: Redis (Upstash) for performance optimization
+- **Email Services**: Nodemailer for OTP delivery
+- **Validation**: Class-validator for input validation
+- **Bloom Filters**: Efficient email uniqueness checking
+- **Scheduled Tasks**: Automatic data refresh intervals
+
+## 🛠 Tech Stack
+
+- **Framework**: NestJS (Node.js)
+- **Database**: Supabase (PostgreSQL)
+- **Cache**: Upstash Redis
+- **Authentication**: JWT
+- **Email**: Nodemailer (Gmail SMTP)
+- **APIs**:
+  - YouTube Data API v3
+  - AniList GraphQL API
+- **Deployment**: Vercel (Serverless)
+- **Validation**: class-validator, class-transformer
+- **Testing**: Jest
+- **Linting**: ESLint
+- **Formatting**: Prettier
+
+## 📁 Project Structure
+
+```
+src/
+├── app.controller.ts          # Root endpoint
+├── app.module.ts              # Main application module
+├── app.service.ts             # Root service
+├── controllers/               # API endpoints
+│   ├── app.controller.ts
+│   ├── youtube/
+│   │   ├── youtube.controller.ts
+│   │   └── youtube.service.ts
+│   ├── nodemailer/
+│   ├── readings/
+│   ├── news/
+│   └── leaderboards/
+├── services/                  # Business logic
+│   ├── youtube/
+│   ├── nodemailer/
+│   ├── readings/
+│   ├── news/
+│   ├── leaderboards/
+│   ├── redis/
+│   └── filter/
+├── supabase/                  # Database layer
+│   ├── supabase.module.ts
+│   ├── user.module.ts
+│   ├── controller/
+│   └── service/
+├── DTOs/                      # Data Transfer Objects
+│   ├── create-user.dto.ts
+│   └── email.dto.ts
+├── utils/
+│   └── types.ts               # TypeScript type definitions
+└── test/                      # End-to-end tests
 ```
 
-## Compile and run the project
+## 🔧 Installation
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- Supabase account
+- Upstash Redis account
+- YouTube Data API key
+- Gmail account for SMTP
+
+### Setup
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd aniverse/backend/aniverse
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration**
+
+   Create a `.env` file in the root directory with the following variables:
+
+   ```env
+   # Server
+   PORT=3000
+
+   # Supabase
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_KEY=your_supabase_anon_key
+   SUPABASE_BUCKET_NAME=your_bucket_name
+
+   # Redis (Upstash)
+   UPSTASH_REDIS_REST_URL=your_upstash_redis_url
+   UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
+
+   # YouTube API
+   YOUTUBE_API_KEY=your_youtube_api_key
+
+   # Email (Gmail SMTP)
+   APP_PASSWORD=your_gmail_app_password
+
+   # JWT
+   JWT_SECRET=your_jwt_secret_key
+   ```
+
+4. **Database Setup**
+
+   Ensure your Supabase database has the following tables:
+
+   - `user` (username, email, profile_picture, search_tokens)
+   - `manhwas` (reading materials)
+   - `LN` (light novels)
+
+## 🚀 Running the Application
+
+### Development
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
+### Production
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run build
+npm run start:prod
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Debug Mode
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run start:debug
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🧪 Testing
 
-## Resources
+### Unit Tests
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+npm run test
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### E2E Tests
 
-## Support
+```bash
+npm run test:e2e
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Test Coverage
 
-## Stay in touch
+```bash
+npm run test:cov
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Watch Mode
 
-## License
+```bash
+npm run test:watch
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 📡 API Endpoints
+
+### Root
+
+- `GET /` - Welcome message
+
+### YouTube API
+
+- `POST /youtube/v1/search/:Search_Query` - Search YouTube videos
+- `POST /youtube/v1/home` - Get personalized home feed
+
+### User Management
+
+- `POST /supabase/user` - Fetch User details
+- `POST /supabase/user/create` - Create new user
+- `POST /supabase/user/customize/profile/image` - Upload profile picture
+- `POST /supabase/user/customize/email` - Update email
+- `POST /supabase/user/customize/username` - Update username
+
+### Authentication
+
+- `POST /nodemailer/sendMail` - Send OTP
+- `POST /nodemailer/verifyMail` - Verify OTP
+- `POST /nodemailer/verifyJwt` - Verify JWT token
+
+### Content
+
+- `GET /readings/manhwas` - Get manhwas
+- `GET /readings/light-novels` - Get light novels
+- `GET /news` - Get anime news
+- `GET /leaderboards` - Get trending anime
+
+## 🔐 Authentication Flow
+
+1. **Registration**:
+
+   - User provides username and email
+   - System sends OTP to email
+   - User verifies OTP
+   - JWT token issued for 7 days
+
+2. **Login**:
+
+   - User requests OTP
+   - Verifies OTP
+   - Receives JWT token
+
+3. **Profile Customization**:
+   - Update username/email
+   - Upload profile picture (stored in Supabase Storage)
+
+## 🎯 Key Services
+
+### YouTube Service
+
+- Searches YouTube for anime AMVs/edits
+- Maintains user search history for personalization
+- Provides paginated results
+
+### User Service
+
+- Handles user CRUD operations
+- Manages profile picture uploads with signed URLs
+- Uses Bloom filter for email uniqueness
+
+### Bloom Filter Service
+
+- Prevents duplicate email registrations
+- Stored in Redis for persistence
+- Auto-refreshes every hour
+
+### News & Leaderboards Services
+
+- Fetch data from AniList GraphQL API
+- Cached in Redis for 24 hours
+- Auto-refresh scheduled tasks
+
+### Nodemailer Service
+
+- Sends styled OTP emails
+- JWT token generation and verification
+- OTP stored in Redis with 20-minute expiry
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+The application is configured for Vercel serverless deployment:
+
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push
+
+### Manual Deployment
+
+```bash
+npm run build
+npm run start:prod
+```
+
+## 🔧 Development Scripts
+
+- `npm run build` - Build the application
+- `npm run format` - Format code with Prettier
+- `npm run lint` - Lint code with ESLint
+- `npm run test` - Run unit tests
+- `npm run test:e2e` - Run e2e tests
+
+## 📊 Performance Optimizations
+
+- **Redis Caching**: News and leaderboards cached for 24 hours
+- **Bloom Filters**: Efficient duplicate checking
+- **Supabase Storage**: Optimized file uploads with signed URLs
+- **Scheduled Tasks**: Automatic data refresh
+- **Pagination**: YouTube API results paginated
+
+## 🔒 Security
+
+- JWT authentication with 7-day expiry
+- OTP verification for email validation
+- Input validation with class-validator
+- Environment variable configuration
+- CORS enabled for cross-origin requests
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## 📝 License
+
+This project is licensed under the UNLICENSED License.
+
+## 📞 Support
+
+For support or questions, please contact the development team.
+
+---
+
+**Built with ❤️ for the anime community**
