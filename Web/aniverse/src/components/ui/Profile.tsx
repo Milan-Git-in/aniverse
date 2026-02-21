@@ -117,8 +117,6 @@ const Profile = () => {
       const data = await res.json();
       console.log(data.response);
       if (data.response.success) {
-        console.log("FLAGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
-        console.log("USER DATA BICH: ", data);
         await fetchUser();
       }
     };
@@ -136,7 +134,7 @@ const Profile = () => {
           {/*Login*/}
         </h3>
         <Image
-          src={user?.profile_picture || "/images/default.jpg"}
+          src={user?.profile_picture || "/Images/default.jpg"}
           alt="User"
           width={40}
           height={40}

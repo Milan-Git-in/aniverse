@@ -4,7 +4,7 @@ import "./globals.css";
 import DarkVeil from "@/components/DarkVeil";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
-
+import { Analytics } from "@vercel/analytics/react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,6 +35,7 @@ export default function RootLayout({
           <DarkVeil />
           {children}
           <Toaster />
+          <Analytics />
         </SidebarProvider>
       </body>
     </html>
