@@ -3,8 +3,8 @@ import * as nodemailer from 'nodemailer';
 import { RedisService } from '../redis/redis.service';
 import { Redis } from '@upstash/redis';
 import jwt from 'jsonwebtoken';
-import { UserService } from 'src/supabase/service/user/user.service';
-import { user } from 'src/DTOs/user';
+import { UserService } from '../../supabase/service/user/user.service';
+import { user } from '../../DTOs/user';
 @Injectable()
 export class NodemailerService {
   private readonly redis: Redis;
