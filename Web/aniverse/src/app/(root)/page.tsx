@@ -9,7 +9,7 @@ const Page = () => {
     redirect("/mobile");
   }
   return (
-    <div className="ml-20 p-5">
+    <div className="ml-20 p-5 ">
       <HomeVideos />
     </div>
   );
