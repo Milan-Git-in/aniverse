@@ -30,8 +30,8 @@ export class YoutubeService {
   }
 
   async searchVideo(
-    email: string,
     query: string,
+    email?: string,
     pageToken = '',
   ): Promise<page | string> {
     const apiKey = process.env.YOUTUBE_API_KEY;
@@ -51,7 +51,13 @@ export class YoutubeService {
         },
       },
     );
-    await this.updateSearchTokens(email, [query]);
+    if (email && email.trim() !== '') {
+      try {
+        await this.updateSearchTokens(email, [query]);
+      } catch (err) {
+        console.error('Failed to update search tokens:', err);
+      }
+    }
     return {
       results: response.data.items.map(
         (item: { snippet: { title: any }; id: { videoId: string } }) => ({

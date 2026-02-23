@@ -4,6 +4,7 @@ import { use, useEffect, useState } from "react";
 import Gallary from "@/components/Gallary";
 import GradientText from "@/components/GradientText";
 import { Videos } from "@/lib/utils";
+import { UserStore } from "@/store/userstore";
 
 export default function ResultsClient({
   searchParams,
@@ -12,18 +13,20 @@ export default function ResultsClient({
 }) {
   const params = use(searchParams);
   const [results, setResults] = useState<Videos[]>([]);
-
   useEffect(() => {
     const getResults = async () => {
       if (!params.search_query) return;
 
-      const res = await fetch(`/search?search_query=${params.search_query}`);
+      const res = await fetch(
+        `/api/search?search_query=${params.search_query}&email=${user?.email}`,
+      );
       const data = await res.json();
-      setResults(data);
+      console.log(data);
+      setResults(data.results || []);
     };
-
     getResults();
   }, [params.search_query]);
+  const { user } = UserStore();
 
   return (
     <div className="ml-20 p-5 flex items-center justify-center h-full">

@@ -7,12 +7,18 @@ export class YoutubeController {
 
   @Post('search/:Search_Query') // means /youtube/v1/search/:id
   async getSearchResults(
-    @Body() body: { email: string },
+    @Body() body: { email?: string } = {},
     @Param('Search_Query') Query: string,
     @Query('pageToken') pageToken: string | undefined,
   ): Promise<page | string> {
-    if (pageToken === undefined) pageToken = '';
-    return await this.youtubeService.searchVideo(body.email, Query, pageToken);
+    if (pageToken === undefined || body.email === undefined) {
+      pageToken = '';
+    }
+    return await this.youtubeService.searchVideo(
+      Query,
+      body.email || '',
+      pageToken,
+    );
   }
 
   @Post('home') // means /youtube/v1/home
