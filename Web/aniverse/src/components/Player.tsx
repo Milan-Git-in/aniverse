@@ -13,7 +13,7 @@ const Player = async ({
   // );
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/search?search_query=${encodeURIComponent(title.split(" ")[0])}`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/api/search?search_query=${encodeURIComponent(title.split(" ")[0])}`,
   );
   const { results } = await response.json();
   console.log(results);

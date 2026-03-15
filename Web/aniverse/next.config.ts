@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_KEY,
     NEXT_PUBLIC_URL: "http://localhost:3000",
+    NEXT_PUBLIC_HOST_URL: "https://web-aniverse.vercel.app",
   },
   images: {
     remotePatterns: [
