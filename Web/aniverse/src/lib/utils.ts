@@ -10,3 +10,12 @@ export type Videos = {
   videoId: string;
   url: string;
 };
+
+export type Message = {
+  id: number;
+  username: string;
+  message: string;
+  from: string;
+  created_at: string;
+  profile_picture: string;
+};

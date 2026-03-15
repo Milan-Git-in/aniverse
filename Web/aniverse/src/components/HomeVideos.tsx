@@ -5,31 +5,31 @@ import React, { useEffect, useState } from "react";
 import Gallary from "./Gallary";
 
 const HomeVideos = () => {
-  const { user } = UserStore();
+  const { user, isLoggedin } = UserStore();
   const [recommendations, setRecommendations] = useState<Videos[]>([]);
+  const getRecommendations = async () => {
+    try {
+      const response = await fetch(`api/homepage`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({ email: user?.email }),
+      });
+      const data: {
+        results: Videos[];
+      } = await response.json();
+      console.log(data);
+      setRecommendations(data.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const getRecommendations = async () => {
-      try {
-        const response = await fetch(`api/homepage`, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify({ email: user?.email }),
-        });
-        const data: {
-          results: [Videos];
-        } = await response.json();
-        console.log(data);
-        setRecommendations(data.results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     getRecommendations();
-  }, []);
+  }, [isLoggedin]);
 
-  return <Gallary recommendations={recommendations} />;
+  return <Gallary recommendations={recommendations} isGrid={true} />;
 };
 
 export default HomeVideos;

@@ -30,6 +30,7 @@ export default function pageLayout({
         <Profile />
       </div>
       <AppSidebar />
+
       {children}
     </div>
   );

@@ -7,6 +7,7 @@ export type video = {
 export type page = {
   results: video[];
   nextPageToken: string;
+  Query: string;
 };
 
 export type customizationResult = Promise<{

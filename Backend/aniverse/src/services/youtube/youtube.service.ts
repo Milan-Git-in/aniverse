@@ -29,14 +29,22 @@ export class YoutubeService {
       .eq('email', email);
   }
 
+  async NextPage(query: string, pageToken: string): Promise<page> {
+    return await this.searchVideo(query, pageToken);
+  }
+
   async searchVideo(
     query: string,
     email?: string,
     pageToken = '',
-  ): Promise<page | string> {
+  ): Promise<page> {
     const apiKey = process.env.YOUTUBE_API_KEY;
     if (!apiKey || apiKey === '') {
-      return 'No API key found';
+      return {
+        Query: '',
+        results: [],
+        nextPageToken: '',
+      };
     }
     const response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search`,
@@ -66,14 +74,44 @@ export class YoutubeService {
           url: 'https://www.youtube.com/embed/' + item.id.videoId,
         }),
       ),
+      Query: `${query} anime amv edit`,
       nextPageToken: response.data.nextPageToken ?? null,
     };
   }
+  async fetchSimilarVideos(videoId: string): Promise<page> {
+    const apiKey = process.env.YOUTUBE_API_KEY;
+    if (!apiKey || apiKey === '') {
+      return {
+        Query: '',
+        results: [],
+        nextPageToken: '',
+      };
+    }
+    try {
+      const response = await axios.get(
+        'https://www.googleapis.com/youtube/v3/search',
+        {
+          params: {
+            part: 'snippet',
+            relatedToVideoId: videoId,
+            key: apiKey,
+            type: 'video',
+            maxResults: 7,
+          },
+        },
+      );
 
+      return response.data;
+    } catch (err) {
+      console.log(err.response?.data);
+      throw err;
+    }
+  }
   async fetchReleveantVideos(email: string): Promise<page> {
     const apiKey = process.env.YOUTUBE_API_KEY;
     if (!apiKey || apiKey === '') {
       return {
+        Query: '',
         results: [],
         nextPageToken: '',
       };
@@ -108,6 +146,7 @@ export class YoutubeService {
           url: 'https://www.youtube.com/embed/' + item.id.videoId,
         }),
       ),
+      Query: q,
       nextPageToken: response.data.nextPageToken ?? null,
     };
   }
@@ -118,6 +157,7 @@ export class YoutubeService {
       return {
         results: [],
         nextPageToken: '',
+        Query: '',
       };
     }
     const response = await axios.get(
@@ -142,6 +182,7 @@ export class YoutubeService {
         }),
       ),
       nextPageToken: response.data.nextPageToken ?? null,
+      Query: 'anime amv edit',
     };
   }
 }
