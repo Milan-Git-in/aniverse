@@ -7,7 +7,6 @@ import {
   Home,
   MessageCircle,
   Trophy,
-  BarChart3,
   Bell,
   BookOpen,
   CloudLightning,
@@ -17,9 +16,8 @@ const items = [
   { title: "Home", href: "/", icon: Home },
   { title: "Chat", href: "/chat", icon: MessageCircle },
   { title: "Populars", href: "/leaderboards", icon: Trophy },
-  { title: "Ranking", href: "/ranking", icon: BarChart3 },
   { title: "Updates", href: "/updates", icon: Bell },
-  { title: "Manhwas", href: "/Manhwas", icon: BookOpen },
+  { title: "Manhwas", href: "/manhwas", icon: BookOpen },
   { title: "Lightnovels", href: "/lightnovels", icon: CloudLightning },
 ];
 
