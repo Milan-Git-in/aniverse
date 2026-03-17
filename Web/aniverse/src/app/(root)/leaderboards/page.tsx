@@ -1,6 +1,6 @@
 import { LeaderBoardCard } from "@/lib/utils";
 import Image from "next/image";
-
+export const dynamic = "force-dynamic";
 const page = async () => {
   const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/leaderboards`);
   const result = await data.json();
