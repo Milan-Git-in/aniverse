@@ -17,7 +17,7 @@ export default function pageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col  text-secondary border-l-4 border-purple-500 h-screen overflow-hidden border">
+    <div className="flex flex-col  text-secondary border-l-4 border-purple-500 h-screen overflow-hidden">
       <div className=" h-[4rem] w-screen px-5 flex justify-between items-center">
         <Link
           href="/"
