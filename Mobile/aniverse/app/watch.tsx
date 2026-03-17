@@ -44,18 +44,18 @@ export default function WatchScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.videoWrapper}>
-        <YoutubePlayer
-          videoId={v}
-          height={width * 9 / 16}
-          play={false}
-        />
+        <YoutubePlayer videoId={v} height={(width * 9) / 16} play={false} />
       </View>
       <View style={styles.content}>
         <Text style={styles.title}>{decodedTitle}</Text>
 
         <Text style={styles.sectionTitle}>Similar Videos</Text>
         {loading ? (
-          <ActivityIndicator size="small" color="#a855f7" style={{ marginTop: 20 }} />
+          <ActivityIndicator
+            size="small"
+            color="#a855f7"
+            style={{ marginTop: 20 }}
+          />
         ) : (
           <FlatList
             data={similar}
@@ -68,8 +68,8 @@ export default function WatchScreen() {
                 onPress={() =>
                   router.push(
                     `/watch?v=${item.videoId}&title=${encodeURIComponent(
-                      item.title
-                    )}`
+                      item.title,
+                    )}`,
                   )
                 }
               >
@@ -116,8 +116,18 @@ const styles = StyleSheet.create({
   },
   list: { paddingBottom: 20 },
   card: { flexDirection: "row", gap: 12, alignItems: "flex-start" },
-  thumbnail: { width: 140, height: 79, borderRadius: 8, backgroundColor: "#2a2a2a" },
+  thumbnail: {
+    width: 140,
+    height: 79,
+    borderRadius: 8,
+    backgroundColor: "#2a2a2a",
+  },
   cardInfo: { flex: 1, justifyContent: "center" },
-  cardTitle: { color: "#d1d5db", fontSize: 13, fontWeight: "500", lineHeight: 18 },
+  cardTitle: {
+    color: "#d1d5db",
+    fontSize: 13,
+    fontWeight: "500",
+    lineHeight: 18,
+  },
   emptyText: { color: "#6b7280", fontSize: 14 },
 });

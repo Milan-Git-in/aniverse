@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet, Image } from 'react-native';
+import React, { useEffect, useRef } from "react";
+import { View, Animated, StyleSheet, Image } from "react-native";
 
 const LoadingScreen = () => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -25,7 +25,7 @@ const LoadingScreen = () => {
   return (
     <View style={styles.container}>
       <Animated.Image
-        source={require('../assets/images/favicon.png')}
+        source={require("../assets/images/favicon.png")}
         style={[styles.image, { transform: [{ scale: scaleAnim }] }]}
       />
     </View>
@@ -35,16 +35,16 @@ const LoadingScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     width: 100,
     height: 100,
     borderRadius: 50,
     borderWidth: 3,
-    borderColor: '#a855f7',
+    borderColor: "#a855f7",
   },
 });
 
