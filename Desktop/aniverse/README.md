@@ -88,17 +88,20 @@ src/
 ### Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd aniverse/Desktop/aniverse
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start development**
+
    ```bash
    npm run dev
    ```
@@ -108,29 +111,35 @@ src/
 ## 🚀 Running the Application
 
 ### Development Mode
+
 ```bash
 npm run dev
 ```
+
 Launches the application in development mode with hot-reload enabled.
 
 ### Production Build
 
 #### Windows
+
 ```bash
 npm run build:win
 ```
 
 #### macOS
+
 ```bash
 npm run build:mac
 ```
 
 #### Linux
+
 ```bash
 npm run build:linux
 ```
 
 ### Preview Build
+
 ```bash
 npm run build
 npm run preview
@@ -166,16 +175,19 @@ npm run build:all
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
 npm run test
 ```
 
 ### End-to-End Tests
+
 ```bash
 npm run test:e2e
 ```
 
 ### Testing Electron Apps
+
 - Uses Spectron for E2E testing
 - Tests both main and renderer processes
 - Includes window management and IPC testing
@@ -183,12 +195,14 @@ npm run test:e2e
 ## 🎨 UI/UX Design
 
 ### Desktop-Specific Features
+
 - **Window Controls**: Custom title bar with minimize/maximize/close
 - **Context Menus**: Right-click menus throughout the application
 - **Keyboard Shortcuts**: Extensive shortcut system for power users
 - **System Integration**: Tray icon, notifications, and global shortcuts
 
 ### Responsive Design
+
 - Adapts to window resizing
 - Supports multiple monitor setups
 - Maintains aspect ratios for content
@@ -196,6 +210,7 @@ npm run test:e2e
 ## 🔧 Configuration
 
 ### Application Settings
+
 - Window size and position persistence
 - Theme preferences (dark/light)
 - Download directory configuration
@@ -203,6 +218,7 @@ npm run test:e2e
 - Notification preferences
 
 ### Development Configuration
+
 ```javascript
 // electron.vite.config.ts
 export default {
@@ -221,11 +237,13 @@ export default {
 ## 📁 File Management
 
 ### Local Storage
+
 - Content downloaded to user-specified directories
 - Metadata stored in application data folder
 - Automatic cleanup and organization
 
 ### Supported Formats
+
 - **Video**: MP4, WebM, MKV
 - **Images**: JPG, PNG, WebP
 - **Documents**: PDF, EPUB (for light novels)
@@ -233,12 +251,14 @@ export default {
 ## 🔐 Security
 
 ### Electron Security
+
 - Context isolation enabled
 - Node integration disabled in renderer
 - Secure preload scripts
 - CSP (Content Security Policy) implementation
 
 ### Data Protection
+
 - Local encryption for sensitive data
 - Secure API key management
 - Certificate pinning for API calls
@@ -246,11 +266,13 @@ export default {
 ## 🚀 Deployment & Updates
 
 ### Auto-Updater
+
 - Built-in update mechanism using electron-updater
 - Supports delta updates for faster downloads
 - Automatic or manual update prompts
 
 ### Distribution Channels
+
 - **Direct Download**: Host installers on your website
 - **App Stores**: Submit to Microsoft Store, Mac App Store
 - **Package Managers**: Chocolatey (Windows), Homebrew (macOS)
@@ -276,6 +298,7 @@ export default {
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow Electron best practices for security
 - Test on all target platforms
 - Ensure proper error handling
@@ -285,11 +308,13 @@ export default {
 ## 📊 Performance Optimization
 
 ### Memory Management
+
 - Efficient garbage collection
 - Lazy loading of components
 - Resource cleanup on window close
 
 ### Rendering Performance
+
 - Hardware acceleration for video
 - Optimized image loading
 - Smooth scrolling and animations
@@ -299,16 +324,19 @@ export default {
 ### Common Issues
 
 **Build Failures**
+
 - Ensure all dependencies are installed
 - Check Node.js version compatibility
 - Verify system requirements for target platform
 
 **Runtime Issues**
+
 - Check console logs in development
 - Verify API endpoints are accessible
 - Ensure proper file permissions
 
 **Packaging Issues**
+
 - Clean node_modules and rebuild
 - Check electron-builder configuration
 - Verify code signing certificates
@@ -316,16 +344,19 @@ export default {
 ## 📱 Platform-Specific Notes
 
 ### Windows
+
 - Requires Visual Studio Build Tools for native modules
 - Supports Windows 10 and later
 - NSIS installer for distribution
 
 ### macOS
+
 - Requires Xcode Command Line Tools
 - Supports macOS 10.13 and later
 - Code signing required for App Store distribution
 
 ### Linux
+
 - Supports most major distributions
 - AppImage for universal compatibility
 - deb/rpm packages for specific distributions
@@ -337,6 +368,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support & Contact
 
 For technical support, bug reports, or feature requests:
+
 - Create an issue in the GitHub repository
 - Check platform-specific documentation
 - Contact the development team

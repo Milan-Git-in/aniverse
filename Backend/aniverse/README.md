@@ -101,12 +101,14 @@ src/
 ### Environment Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd aniverse/Backend/aniverse
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -142,6 +144,7 @@ src/
 4. **Database Schema**
 
    Ensure your Supabase database has the required tables:
+
    - `user` (username, email, profile_picture, search_tokens, etc.)
    - `manhwas` (reading materials data)
    - `light_novels` (LN data)
@@ -150,18 +153,22 @@ src/
 ## 🚀 Running the Application
 
 ### Development Mode
+
 ```bash
 npm run start:dev
 ```
+
 Starts the server with hot-reload enabled on `http://localhost:3000`
 
 ### Production Mode
+
 ```bash
 npm run build
 npm run start:prod
 ```
 
 ### Debug Mode
+
 ```bash
 npm run start:debug
 ```
@@ -169,21 +176,25 @@ npm run start:debug
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
 npm run test
 ```
 
 ### End-to-End Tests
+
 ```bash
 npm run test:e2e
 ```
 
 ### Test Coverage
+
 ```bash
 npm run test:cov
 ```
 
 ### Watch Mode
+
 ```bash
 npm run test:watch
 ```
@@ -191,13 +202,16 @@ npm run test:watch
 ## 📡 API Endpoints
 
 ### Root & Health
+
 - `GET /` - API health check and welcome message
 
 ### YouTube Integration
+
 - `POST /youtube/v1/search/:searchQuery` - Search YouTube videos with personalization
 - `POST /youtube/v1/home` - Get personalized home feed based on user history
 
 ### User Management
+
 - `POST /supabase/user` - Retrieve user profile details
 - `POST /supabase/user/create` - Create new user account
 - `POST /supabase/user/customize/profile/image` - Upload/update profile picture
@@ -205,11 +219,13 @@ npm run test:watch
 - `POST /supabase/user/customize/username` - Update username
 
 ### Authentication
+
 - `POST /nodemailer/sendMail` - Send OTP to email for verification
 - `POST /nodemailer/verifyMail` - Verify OTP code
 - `POST /nodemailer/verifyJwt` - Validate JWT token
 
 ### Content Services
+
 - `GET /readings/manhwas` - Retrieve manhwa catalog
 - `GET /readings/light-novels` - Retrieve light novels catalog
 - `GET /news` - Fetch latest anime news from AniList
@@ -218,6 +234,7 @@ npm run test:watch
 ## 🔐 Authentication Flow
 
 ### User Registration
+
 1. User submits username and email
 2. System validates input and checks for duplicates using Bloom filter
 3. OTP sent to provided email address
@@ -226,12 +243,14 @@ npm run test:watch
 6. User profile created in database
 
 ### User Login
+
 1. User requests OTP for existing account
 2. OTP sent to registered email
 3. User verifies OTP
 4. JWT token issued for session
 
 ### Profile Management
+
 - Username and email updates require re-verification
 - Profile pictures stored securely in Supabase Storage
 - All changes logged and cached appropriately
@@ -239,36 +258,42 @@ npm run test:watch
 ## 🎯 Key Services Explained
 
 ### YouTube Service
+
 - Integrates with YouTube Data API v3
 - Maintains user search history for personalized recommendations
 - Implements pagination for large result sets
 - Filters content based on anime-related keywords
 
 ### User Service
+
 - Handles all CRUD operations for user data
 - Manages profile picture uploads with signed URLs
 - Implements Bloom filter for efficient email uniqueness checking
 - Coordinates with authentication services
 
 ### Bloom Filter Service
+
 - Prevents duplicate email registrations at scale
 - Stored in Redis for persistence across deployments
 - Auto-refreshes every hour to maintain accuracy
 - Memory-efficient probabilistic data structure
 
 ### News & Leaderboards Services
+
 - Fetch real-time data from AniList GraphQL API
 - Implement Redis caching with 24-hour TTL
 - Scheduled background tasks for data refresh
 - Error handling for external API failures
 
 ### Nodemailer Service
+
 - Sends styled HTML OTP emails via Gmail SMTP
 - Generates and validates JWT tokens
 - Manages OTP storage in Redis with expiration
 - Implements rate limiting for security
 
 ### Redis Service
+
 - Centralized caching layer for performance
 - Session management and temporary data storage
 - Bloom filter persistence
@@ -277,18 +302,21 @@ npm run test:watch
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 1. Connect GitHub repository to Vercel
 2. Configure environment variables in Vercel dashboard
 3. Deploy automatically on push to main branch
 4. Serverless functions scale automatically
 
 ### Manual Deployment
+
 ```bash
 npm run build
 npm run start:prod
 ```
 
 ### Docker Deployment (Optional)
+
 ```dockerfile
 FROM node:18-alpine
 WORKDIR /app
@@ -303,17 +331,20 @@ CMD ["npm", "run", "start:prod"]
 ## 📊 Performance & Scalability
 
 ### Caching Strategy
+
 - Redis caching for external API responses (24-hour TTL)
 - User session data with appropriate expiration
 - Bloom filter persistence across restarts
 
 ### Optimization Features
+
 - Pagination for large datasets
 - Lazy loading for content
 - Background job processing for heavy operations
 - Database query optimization
 
 ### Monitoring
+
 - Health check endpoints
 - Error logging and tracking
 - Performance metrics collection
@@ -338,6 +369,7 @@ CMD ["npm", "run", "start:prod"]
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow TypeScript best practices
 - Write comprehensive tests for new features
 - Update documentation for API changes
@@ -350,6 +382,7 @@ This project is licensed under the UNLICENSED License - see the LICENSE file for
 ## 📞 Support & Contact
 
 For technical support, bug reports, or feature requests:
+
 - Create an issue in the GitHub repository
 - Contact the development team
 

@@ -81,17 +81,20 @@ app/
 ### Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd aniverse/Mobile/aniverse
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start the development server**
+
    ```bash
    npx expo start
    ```
@@ -104,27 +107,33 @@ app/
 ## 🚀 Running the Application
 
 ### Development Mode
+
 ```bash
 npx expo start
 ```
+
 Starts the Expo development server with options to run on different platforms.
 
 ### Production Build
 
 #### iOS
+
 ```bash
 npx expo run:ios
 ```
 
 #### Android
+
 ```bash
 npx expo run:android
 ```
 
 ### Expo Go (Quick Testing)
+
 ```bash
 npx expo start --tunnel
 ```
+
 Use Expo Go app to test without full native build.
 
 ## 📦 Building for Distribution
@@ -132,21 +141,25 @@ Use Expo Go app to test without full native build.
 ### Expo Application Services (EAS)
 
 1. **Install EAS CLI**
+
    ```bash
    npm install -g @expo/eas-cli
    ```
 
 2. **Login to EAS**
+
    ```bash
    eas login
    ```
 
 3. **Configure build**
+
    ```bash
    eas build:configure
    ```
 
 4. **Build for platforms**
+
    ```bash
    # iOS
    eas build --platform ios
@@ -161,12 +174,14 @@ Use Expo Go app to test without full native build.
 ### App Store Submission
 
 #### iOS (App Store)
+
 1. Build with EAS
 2. Download build artifacts
 3. Upload to App Store Connect using Transporter
 4. Submit for review
 
 #### Android (Google Play)
+
 1. Build with EAS (AAB format)
 2. Upload to Google Play Console
 3. Configure store listing
@@ -175,16 +190,19 @@ Use Expo Go app to test without full native build.
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
 npm run test
 ```
 
 ### Integration Tests
+
 ```bash
 npm run test:integration
 ```
 
 ### Device Testing
+
 - Use Expo Go for quick testing
 - Test on physical devices regularly
 - Use TestFlight (iOS) and Internal Testing (Android) for beta testing
@@ -192,12 +210,14 @@ npm run test:integration
 ## 🎨 UI/UX Design
 
 ### Mobile-First Design
+
 - Touch-friendly button sizes (44pt minimum)
 - Swipe gestures for navigation
 - Pull-to-refresh functionality
 - Optimized typography for mobile screens
 
 ### Platform-Specific Features
+
 - **iOS**: Native iOS design patterns, haptic feedback
 - **Android**: Material Design 3, system theming
 - **Cross-Platform**: Consistent experience with platform adaptations
@@ -205,17 +225,20 @@ npm run test:integration
 ## 📱 Device Features
 
 ### Offline Capabilities
+
 - Download content for offline access
 - Background download management
 - Storage optimization and cleanup
 
 ### Hardware Integration
+
 - **Camera**: QR code scanning for content sharing (future)
 - **Biometrics**: Fingerprint/Face ID for quick access (future)
 - **Haptics**: Vibration feedback for interactions
 - **Orientation**: Adaptive layouts for portrait/landscape
 
 ### Performance Optimization
+
 - Image optimization for mobile networks
 - Lazy loading of content
 - Memory management for large libraries
@@ -224,12 +247,14 @@ npm run test:integration
 ## 🔐 Security & Privacy
 
 ### Data Protection
+
 - Secure token storage with Keychain (iOS) / Keystore (Android)
 - Encrypted local storage for sensitive data
 - Certificate pinning for API calls
 - Privacy-focused data collection
 
 ### App Permissions
+
 - Storage: For offline content downloads
 - Network: For content streaming and API calls
 - Notifications: For content update alerts (optional)
@@ -237,11 +262,13 @@ npm run test:integration
 ## 🚀 Deployment
 
 ### Expo Updates
+
 - Over-the-air updates without app store approval
 - Instant bug fixes and feature deployment
 - Version management and rollback capabilities
 
 ### App Store Guidelines
+
 - Compliance with platform policies
 - Age ratings and content warnings
 - Privacy policy and terms of service
@@ -266,6 +293,7 @@ npm run test:integration
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow React Native and Expo best practices
 - Test on both iOS and Android regularly
 - Optimize for performance and battery life
@@ -275,12 +303,14 @@ npm run test:integration
 ## 📊 Performance Monitoring
 
 ### App Performance
+
 - Startup time optimization
 - Memory usage monitoring
 - Network request efficiency
 - Battery consumption tracking
 
 ### User Analytics
+
 - Crash reporting with Sentry
 - User engagement metrics
 - Performance profiling
@@ -291,16 +321,19 @@ npm run test:integration
 ### Common Issues
 
 **Build Failures**
+
 - Clear Metro cache: `npx expo start --clear`
 - Reset project: `npm run reset-project`
 - Check Expo SDK compatibility
 
 **Runtime Issues**
+
 - Check device logs in Expo CLI
 - Verify API endpoints accessibility
 - Test on physical devices
 
 **Performance Issues**
+
 - Profile with Flipper or React DevTools
 - Check bundle size and optimize imports
 - Monitor memory usage
@@ -308,12 +341,14 @@ npm run test:integration
 ## 📱 Platform-Specific Considerations
 
 ### iOS Development
+
 - Requires macOS with Xcode
 - TestFlight for beta distribution
 - App Store Connect for submissions
 - iOS-specific design guidelines
 
 ### Android Development
+
 - Android Studio for advanced debugging
 - Google Play Console for distribution
 - Android-specific permissions and features
@@ -326,6 +361,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support & Contact
 
 For technical support, bug reports, or feature requests:
+
 - Create an issue in the GitHub repository
 - Check Expo documentation for common solutions
 - Contact the development team

@@ -92,12 +92,14 @@ src/
 ### Environment Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd aniverse/Web/aniverse
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -125,6 +127,7 @@ src/
    ```
 
 4. **Development Setup**
+
    ```bash
    npm run dev
    ```
@@ -134,18 +137,22 @@ src/
 ## 🚀 Running the Application
 
 ### Development Mode
+
 ```bash
 npm run dev
 ```
+
 Starts the development server with hot-reload on `http://localhost:3000`
 
 ### Production Build
+
 ```bash
 npm run build
 npm start
 ```
 
 ### Static Export (Optional)
+
 ```bash
 npm run export
 ```
@@ -153,16 +160,19 @@ npm run export
 ## 🧪 Testing
 
 ### Unit Tests
+
 ```bash
 npm run test
 ```
 
 ### End-to-End Tests
+
 ```bash
 npm run test:e2e
 ```
 
 ### Test Coverage
+
 ```bash
 npm run test:coverage
 ```
@@ -170,10 +180,12 @@ npm run test:coverage
 ## 📱 Progressive Web App (PWA)
 
 ### Installation
+
 - **Desktop**: Click "Install" in the browser address bar or use the install prompt
 - **Mobile**: Add to home screen from browser menu
 
 ### Features
+
 - Offline content access
 - Push notifications for updates
 - Native-like performance
@@ -182,12 +194,14 @@ npm run test:coverage
 ## 🎨 UI/UX Design
 
 ### Design System
+
 - Consistent color palette and typography
 - Modular component architecture
 - Responsive grid system
 - Accessible design patterns
 
 ### Key Components
+
 - **Navigation**: Responsive sidebar and mobile drawer
 - **Content Cards**: Optimized for different content types
 - **Player/Reader**: Custom-built for optimal UX
@@ -197,12 +211,14 @@ npm run test:coverage
 ## 🔐 Authentication & Security
 
 ### User Authentication
+
 - JWT-based authentication with refresh tokens
 - Secure token storage in httpOnly cookies
 - Automatic token refresh
 - Logout on token expiration
 
 ### Security Features
+
 - CSRF protection
 - XSS prevention
 - Content Security Policy (CSP)
@@ -211,12 +227,14 @@ npm run test:coverage
 ## 📊 Performance Optimization
 
 ### Core Web Vitals
+
 - Optimized for Lighthouse scores
 - Fast First Contentful Paint (FCP)
 - Improved Largest Contentful Paint (LCP)
 - Reduced Cumulative Layout Shift (CLS)
 
 ### Optimization Techniques
+
 - Image optimization with Next.js Image component
 - Code splitting and lazy loading
 - Service worker caching
@@ -225,18 +243,21 @@ npm run test:coverage
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 1. Connect GitHub repository to Vercel
 2. Configure environment variables
 3. Enable automatic deployments
 4. Configure custom domain (optional)
 
 ### Manual Deployment
+
 ```bash
 npm run build
 npm run start
 ```
 
 ### Docker Deployment
+
 ```dockerfile
 FROM node:18-alpine AS builder
 WORKDIR /app
@@ -274,6 +295,7 @@ CMD ["npm", "start"]
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow TypeScript and React best practices
 - Write comprehensive tests for new features
 - Ensure responsive design across all screen sizes
@@ -283,11 +305,13 @@ CMD ["npm", "start"]
 ## 📱 Mobile Responsiveness
 
 ### Breakpoints
+
 - Mobile: < 768px
 - Tablet: 768px - 1024px
 - Desktop: > 1024px
 
 ### Mobile Optimizations
+
 - Touch-friendly interface elements
 - Optimized typography for small screens
 - Efficient scrolling and navigation
@@ -296,12 +320,14 @@ CMD ["npm", "start"]
 ## 🔄 API Integration
 
 ### Backend Communication
+
 - RESTful API calls to Aniverse Backend
 - GraphQL queries for complex data fetching
 - Real-time subscriptions for live updates
 - Error handling and retry logic
 
 ### External APIs
+
 - YouTube Data API for video content
 - AniList API for anime/manga data
 - Social media APIs for sharing
@@ -309,12 +335,14 @@ CMD ["npm", "start"]
 ## 📈 Analytics & Monitoring
 
 ### Performance Monitoring
+
 - Core Web Vitals tracking
 - Error boundary implementation
 - User interaction analytics
 - Performance profiling
 
 ### User Analytics (Optional)
+
 - Page view tracking
 - User journey analysis
 - Content engagement metrics
@@ -327,6 +355,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support & Contact
 
 For technical support, bug reports, or feature requests:
+
 - Create an issue in the GitHub repository
 - Contact the development team
 - Check the documentation for common solutions
