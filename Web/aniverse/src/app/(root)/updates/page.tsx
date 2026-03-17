@@ -19,14 +19,14 @@ const page = () => {
   }, []);
 
   return (
-    <div className="ml-20 p-5">
+    <div className="ml-20 p-5 ">
       <Selector position={position} setPosition={setPosition} />
       <div className="mt-5">
         {position === 1 ? (
           <div className="flex flex-col gap-3">
             <h2>Airing Today</h2>
             <div
-              className="grid grid-cols-4 gap-4 h-screen overflow-y-scroll"
+              className="grid grid-cols-4 gap-4 h-screen pb-50 overflow-y-scroll"
               style={{
                 scrollbarWidth: "none",
               }}

@@ -1,13 +1,32 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
+import { join, resolve } from 'path'
+import { spawn } from 'child_process'
+import { get } from 'http'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+
+function waitForServer(url: string, callback: () => void) {
+  const check = () => {
+    get(url, (res) => {
+      if (res.statusCode === 200) {
+        callback()
+      } else {
+        setTimeout(check, 1000)
+      }
+    }).on('error', () => {
+      setTimeout(check, 1000)
+    })
+  }
+  check()
+}
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1000,
+    height: 700,
+    minWidth: 1000,
+    minHeight: 700,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -26,13 +45,18 @@ function createWindow(): void {
     return { action: 'deny' }
   })
 
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  const webPath = resolve(process.cwd(), '../Web/aniverse')
+  const standalonePath = resolve(process.cwd(), '../Web/aniverse/.next/standalone')
+
+  if (is.dev) {
+    spawn('npm', ['run', 'dev'], { cwd: webPath, stdio: 'inherit' })
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    spawn('node', ['server.js'], { cwd: standalonePath, stdio: 'inherit' })
   }
+
+  waitForServer('http://localhost:3000', () => {
+    mainWindow.loadURL('http://localhost:3000')
+  })
 }
 
 // This method will be called when Electron has finished

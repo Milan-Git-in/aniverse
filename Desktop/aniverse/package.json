@@ -11,14 +11,15 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
-    "start": "electron-vite preview",
-    "dev": "electron-vite dev",
-    "build": "npm run typecheck && electron-vite build",
+    "start": "electron .",
+    "dev": "concurrently \"npm --prefix C:/Users/milan/OneDrive/Desktop/ArcHome/aniverse/Web/aniverse run dev\" \"wait-on http://localhost:3000 && electron-vite dev\"",
+    "build": "npm --prefix C:/Users/milan/OneDrive/Desktop/ArcHome/aniverse/Web/aniverse run build && npm run typecheck && electron-vite build",
+    "electron": "concurrently \"npm --prefix C:/Users/milan/OneDrive/Desktop/ArcHome/aniverse/Web/aniverse run start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
-    "build:mac": "electron-vite build && electron-builder --mac",
-    "build:linux": "electron-vite build && electron-builder --linux"
+    "build:mac": "npm run build && electron-builder --mac",
+    "build:linux": "npm run build && electron-builder --linux"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
@@ -34,6 +35,7 @@
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^8.2.2",
     "electron": "^35.1.5",
     "electron-builder": "^25.1.8",
     "electron-vite": "^3.1.0",
@@ -47,6 +49,7 @@
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.5",
     "typescript": "^5.8.3",
-    "vite": "^6.2.6"
+    "vite": "^6.2.6",
+    "wait-on": "^7.2.0"
   }
 }
