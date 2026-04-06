@@ -15,7 +15,13 @@ const Page = () => {
     >
       <h1>
         Use <p className="m-0 p-0 inline font-bold text-red-700">Aniverse</p>{" "}
-        App for better experience
+        App for better experience @{" "}
+        <Link
+          href="https://expo.dev/accounts/milan.7x/projects/aniverse/builds/2c62600f-8845-4db2-829a-92474159d932"
+          className="text-blue-500 hover:underline"
+        >
+          Android Build.
+        </Link>
         <hr className="my-4" />
         <div className="text-lg bg-linear-90 from-yellow-500 to-red-600 bg-clip-text flex gap-3 flex-col">
           In Web? Increase Window width & click below !
