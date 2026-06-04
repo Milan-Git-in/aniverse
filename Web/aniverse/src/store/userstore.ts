@@ -13,6 +13,8 @@ type UserStore = {
   setUser: (user: User) => void;
   isLoggedin: boolean;
   setLoggedin: (isLoggedin: boolean) => void;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 };
 
 export const UserStore = create<UserStore>((set) => ({
@@ -26,4 +28,10 @@ export const UserStore = create<UserStore>((set) => ({
     set(() => ({
       isLoggedin,
     })),
+  isLoading: true,
+  setIsLoading(isLoading) {
+    set(() => ({
+      isLoading,
+    }));
+  },
 }));

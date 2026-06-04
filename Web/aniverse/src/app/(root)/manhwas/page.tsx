@@ -4,7 +4,7 @@ import ManhwaGrid from "@/components/ManhwaGrid";
 const page = async () => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/readings/manhwas`,
-    { cache: "no-store" },
+    { cache: "force-cache" },
   );
   const manhwas: Manhwa[] = await response.json();
 

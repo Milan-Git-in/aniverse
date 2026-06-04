@@ -10,7 +10,7 @@ import { User, UserStore } from "@/store/userstore";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 const Profile = () => {
-  const { user, setUser, isLoggedin, setLoggedin } = UserStore();
+  const { user, setUser, isLoggedin, setLoggedin, setIsLoading } = UserStore();
   const [isOpen, setIsOpen] = useState(false);
   const emailref = useRef<null | HTMLInputElement>(null);
   const buttonref = useRef<null | HTMLButtonElement>(null);
@@ -62,6 +62,7 @@ const Profile = () => {
       AvatarRef.current.src = data.user.profile_picture;
     setUser(data.user);
     setLoggedin(true);
+    setIsLoading(false);
   };
 
   const onVerify = async () => {

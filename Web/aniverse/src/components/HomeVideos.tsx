@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Gallary from "./Gallary";
 
 const HomeVideos = () => {
-  const { user, isLoggedin } = UserStore();
+  const { user, isLoggedin, isLoading } = UserStore();
   const [recommendations, setRecommendations] = useState<Videos[]>([]);
   const getRecommendations = async () => {
     try {
@@ -26,6 +26,7 @@ const HomeVideos = () => {
     }
   };
   useEffect(() => {
+    if (isLoading) return;
     getRecommendations();
   }, [isLoggedin]);
 

@@ -3,6 +3,10 @@
 # dependencies
 node_modules/
 
+
+*.bat
+*.jar
+
 # Expo
 .expo/
 dist/
